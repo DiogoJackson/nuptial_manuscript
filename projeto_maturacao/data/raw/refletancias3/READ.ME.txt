@@ -1,0 +1,12 @@
+Espectros de refletancia da carapace nupcial do Leptuca leptodactyla medidas em campo.
+30/10/2024
+
+001_ll_br_c_brac_nup
+
+001 = numero
+ll = Leptuca leptodactyla
+br = barra do rio
+c = carapace
+brac = braquiquela
+lep = leptoquela
+nup = nupcial (carapace branca)
