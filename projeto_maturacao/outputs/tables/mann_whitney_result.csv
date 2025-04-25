@@ -1,0 +1,5 @@
+"comparation","body_region","variable","statistic","p.value","method","alternative"
+"Bright_vs_Dark","Claw","short_qi",1109,0.444846988905159,"Wilcoxon rank sum test with continuity correction","two.sided"
+"Bright_vs_Dark","Carapace","short_qi",173,6.52894306331204e-09,"Wilcoxon rank sum test with continuity correction","two.sided"
+"Bright_vs_Dark","Claw","medium_qi",1095,0.505763380779246,"Wilcoxon rank sum test with continuity correction","two.sided"
+"Bright_vs_Dark","Carapace","medium_qi",149,2.32682346557785e-09,"Wilcoxon rank sum test with continuity correction","two.sided"
