@@ -9,7 +9,7 @@
 #Packages ----
 library(pavo)
 library(tidyverse)
-library(colorspec)
+library(colorspec) #remotes::install_github("Diogojackson/colorspec/colorspec")
 
 #Import reflectance data ----
 reflet <- read.csv("data/raw/refletancias/00_refletancias.csv")

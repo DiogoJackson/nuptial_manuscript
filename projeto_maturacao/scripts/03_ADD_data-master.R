@@ -17,15 +17,14 @@ nrow(data_force)
 # Preenchendo valores com NA para alinhar o número de linhas
 data_force2 <- data_force %>%
   mutate(ID = c(vis_results$ID[1:n()], rep(NA, max(0, n() - nrow(vis_results))))) %>% 
-  relocate(identidade, ID)
+  relocate(ID, identidade)
 
 data_master <- dplyr::left_join(vis_results, data_force2, by = "ID")
 head(data_master)
 
 #Clean data_master----
 data_master2 <- data_master %>% 
-  select(-identidade,
-         -claw_type.y,
+  select(-claw_type.y,
          -body_region.y,
          -weight_mg) %>% 
   rename(claw_type = claw_type.x,
@@ -42,3 +41,4 @@ data_master_test <- read.csv("data/processed/04_data_master.csv")
 head(data_master_test)
 
 # Fim ---------------------------------------------------------------------
+

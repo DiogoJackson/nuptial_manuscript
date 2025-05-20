@@ -22,10 +22,14 @@ dados_proporcao2 <- dados_clean %>%
   group_by(Sex, carapace_color) %>%
   mutate(prop = count / sum(count))
 
+dados_clean %>% 
+  group_by(Sex) %>% 
+  count()
+
 #Graphics ----
 p1 <- ggplot(dados_proporcao2, aes(x = carapace_color, y = prop, fill = maturation_stage)) +
   geom_bar(stat = "identity") +
-  scale_fill_manual(values = c("#ffb560", "#404244","black")) +
+  scale_fill_manual(values = c("#ffb560", "gray35","black")) +
   labs(x = "Carapace color",
        y = "Proportion",
        fill = "Maturation stage") +

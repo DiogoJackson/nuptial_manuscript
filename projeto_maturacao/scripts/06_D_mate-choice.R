@@ -40,6 +40,10 @@ dados_resumo <- dataf %>%
   group_by(color) %>%
   summarise(total = sum(choice))
 
+dataf %>%
+  group_by(color) %>%
+  count()
+
 # Calcular proporção para o gráfico de donut
 dados_resumo$fraction <- dados_resumo$total / sum(dados_resumo$total)
 

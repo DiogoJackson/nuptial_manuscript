@@ -35,13 +35,13 @@ data.b <- data_brac %>%
                                     "Dark" = "Dark",
                                     "White" = "Bright"))
 
-weight_str_size <- ggplot(data.b, aes(size, weight_mg, color = carapace_type))+ #a variavel weight_g possivelmente eh weight_mg
+weight_str_size <- ggplot(data.b, aes(weight_mg, size, color = carapace_type))+ #a variavel weight_g possivelmente eh weight_mg
   geom_point(alpha = 0.7, size = 4)+
   geom_smooth(method = "glm", se = FALSE, size = 1.5)+
   scale_color_manual(values = c("#ffb560", 
                                 "#404244"))+
-  labs(x = "Claw size (mm)",
-       y = "Claw weight (mg)",
+  labs(x = "Claw mass (mg)",
+       y = "Claw size (mm)",
        color = "Carapace color")+
   theme_classic(base_size = 24)
 weight_str_size
@@ -51,7 +51,7 @@ str_weight_size <- ggplot(data.b, aes(x = weight_mg, y = max_force, color = cara
   geom_smooth(method = "glm", se = FALSE, size = 1.5) +
   scale_color_manual(values = c("#ffb560", "#404244")) +
   labs(
-    x = "Mass (mg)",
+    x = "Claw mass (mg)",
     y = "Maximum force (N)",
     color = "Carapace color",
     size = "Claw size (mm)"
@@ -70,7 +70,7 @@ fig3
 
 #Save plots ----
 ggsave(plot = fig3, 
-       filename = "outputs/figures/04_figure_3_glm.png",
+       filename = "outputs/figures/Figure_3_clawmass.png",
        width = 8.5, 
        height = 10, 
        dpi = 300)

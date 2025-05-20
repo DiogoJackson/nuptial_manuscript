@@ -25,7 +25,7 @@ data_cara <- data %>%
   filter(vismodel == "Fiddler crab") %>% 
   filter(body_region == "Carapace") %>% 
   filter(claw_type == "Brachychelous") %>% 
-  filter(carapace_color != "Bright")
+  filter(carapace_type != "Bright")
 
 data_claw <- data %>% 
   filter(vismodel == "Fiddler crab") %>% 

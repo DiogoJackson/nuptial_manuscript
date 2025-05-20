@@ -11,12 +11,15 @@ library(tidyverse)
 library(pavo)
 library(colorspec)
 
+#To install `colorspec` use: remotes::install_github("Diogojackson/colorspec/colorspec")
+
 #Import procspec data ----
 refletancias <- getspec("data/raw/refletancias",                 
                                 ext=c("procspec","txt"), 
                                 decimal=",", 
                                 lim=c(300,700))
-refletancias <- fixspec(refletancias)
+
+refletancias <- colorspec::fixspec(refletancias)
 
 #Save reflectances ----
 write.csv(refletancias,

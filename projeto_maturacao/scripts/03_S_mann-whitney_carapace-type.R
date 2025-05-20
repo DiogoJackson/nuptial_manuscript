@@ -120,9 +120,6 @@ s <- ggplot(data_brac2, aes(carapace_type, s, fill = carapace_type))+
   facet_grid(~body_region)
 s 
 
-shapiro.test(data_brac2$s)
-wilcox.test(data_brac2$carapace_type, data_brac2$s)
-
 m <- ggplot(data_brac2, aes(carapace_type, m, fill = carapace_type))+
   stat_halfeye(alpha = 0.5, justification = 0, width = 0.5, .width = 0, adjust = 1)+
   stat_dots(aes(color = carapace_type),side = "left",justification = 1, binwidth = 0.009)+

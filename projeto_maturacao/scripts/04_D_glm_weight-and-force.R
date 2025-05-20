@@ -16,36 +16,18 @@ library(caret)
 data <- read.csv("data/processed/04_data_master.csv")
 glimpse(data)
 
-#1.1 convertendo dados
-data$max_force <- as.numeric(data$max_force)
-
-#transformando em beta ----
-
-#Se os dados apresentarem distribuicao beta, mas possuir algum valor que nao esteja entre 0 e 1.
-#Transforma-se em beta usando-se a formula abaixo:
-
-# beta = xi / (xmax + constante)
-
-#xi = cada valor
-#xmax = valor maximo da variavel (nesse caso forca)
-#constante = valor criado 0.001
-
-data.b <- data %>% 
-  filter(carapace_type != "Real") %>% #retirar os animais que foram medidos em campo e nao possuem medicao de forca, peso, etc.
-  dplyr::mutate(force.b = max_force/(max(max_force) + 0.001))
-
 #2. Analisando tipo de quela ------------------------------------------------------
 #subset da modelagem visual do caranguejo considerando apenas os valores de quela
-data_qt <- data.b %>% 
+data_qt <- data %>% 
   filter(vismodel == "Fiddler crab") %>% 
   filter(body_region == "Claw") #qt = quela type
 
-data_brac <- data.b %>% 
+data_brac <- data %>% 
   filter(vismodel == "Fiddler crab") %>% 
   filter(body_region == "Claw") %>% 
   filter(claw_type == "Brachychelous")
 
-data_cara <- data.b %>% 
+data_cara <- data %>% 
   filter(vismodel == "Fiddler crab") %>% 
   filter(body_region == "Carapace") %>% 
   filter(claw_type == "Brachychelous")
