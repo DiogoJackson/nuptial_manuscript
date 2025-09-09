@@ -1,17 +1,14 @@
-# Diogo Thesis
-# Chapter 3 - Nuptial coloration
+# Nuptial coloration in fiddler crab
 # Script to create reflectance spreadsheet
 # Author: Diogo Silva
 # date: Mon Jul 18 17:36:55 2022
 # last update:
-# Sun Sep 29 16:14:41 2024 ------------------------------
+# Wed May 21 08:06:47 2025 ------------------------------
 
 #Packages ----
 library(tidyverse)
 library(pavo)
-library(colorspec)
-
-#To install `colorspec` use: remotes::install_github("Diogojackson/colorspec/colorspec")
+library(colorspec) #To install `colorspec` use: remotes::install_github("Diogojackson/colorspec/colorspec")
 
 #Import procspec data ----
 refletancias <- getspec("data/raw/refletancias",                 
@@ -31,4 +28,4 @@ reflet_test <- read.csv("data/raw/refletancias/00_refletancias.csv")
 reflet_test <- fixspec(reflet_test)
 head(reflet_test)
 
-# FIM ----
+# THE END ----

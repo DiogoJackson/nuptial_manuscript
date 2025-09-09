@@ -1,6 +1,6 @@
 #Script para fazer os graficos das diferenças de carapaça nupcial e escura
 #Author: Diogo Silva
-# Fri Dec 23 17:40:13 2022 ------------------------------
+# Tue Sep  9 11:10:31 2025 ------------------------------
 
 #Packages ----
 library(tidyverse)
@@ -35,16 +35,26 @@ data.b <- data_brac %>%
                                     "Dark" = "Dark",
                                     "White" = "Bright"))
 
-weight_size <- ggplot(data.b, aes(size, weight_mg, color = carapace_type))+ #a variavel weight_g possivelmente eh weight_mg
+weight_size <- ggplot(data.b, aes(size, weight_mg))+ #a variavel weight_g possivelmente eh weight_mg
   geom_point(alpha = 0.7, size = 4)+
   geom_smooth(method = "glm", se = FALSE, size = 1.5)+
-  scale_color_manual(values = c("#ffb560", 
-                                "#404244"))+
   labs(x = "Claw size (mm)",
        y = "Claw mass (mg)",
        color = "Carapace color")+
   theme_classic(base_size = 24)
-weight_size
+weight_str_size
+
+weight_color <- ggplot(data.b, aes(carapace_type, weight_mg, fill = carapace_type))+
+  stat_halfeye(alpha = 0.5, justification = 0, width = 0.5, .width = 0, adjust = 1)+
+  stat_dots(aes(color = carapace_type),side = "left",justification = 1, binwidth = 2)+
+  geom_boxplot(width = 0.15, show.legend = F, fill = "white")+
+  scale_fill_manual(values=c("grey30","#ffb560"))+
+  scale_color_manual(values=c("grey30","#ffb560"))+
+  labs(x = "Carapace color",
+       y = "Claw mass (mg)")+
+  theme_classic(base_size = 24)+
+  theme(legend.position = "none")
+weight_color
 
 str_weight_size <- ggplot(data.b, aes(x = weight_mg, y = max_force, color = carapace_type, size = size)) +
   geom_point(alpha = 0.7) +
@@ -61,17 +71,17 @@ str_weight_size
 
 
 #Figure 1 ----
-fig3 <- plot_grid(weight_size, str_weight_size,
-                  ncol = 1,
+fig3 <- plot_grid(weight_size, weight_color, str_weight_size,
+                  ncol = 2,
                   labels = "AUTO",
-                  align = "vh",
+                  align = "AUTO",
                   label_size = 15)
 fig3
 
 #Save plots ----
 ggsave(plot = fig3, 
-       filename = "outputs/figures/Figure_3_clawmass.png",
-       width = 8.5, 
-       height = 10, 
+       filename = "outputs/figures/Figure_3_clawmass_REVIEWED.png",
+       width = 14, 
+       height = 14, 
        dpi = 300)
 

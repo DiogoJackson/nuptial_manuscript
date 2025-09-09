@@ -1,3 +1,10 @@
+# Nuptial coloration in fiddler crab
+# Script to analyze mate choice data (white males vs dark males)
+# Author: Diogo Silva
+# date: Mon Jul 18 17:36:55 2022
+# last update:
+# Tue Sep  9 09:34:14 2025 ------------------------------
+
 #Packages ----
 library(tidyverse)
 library(pavo)
@@ -20,13 +27,11 @@ data
 dataf <- data %>% 
   filter(experimento == "oficial")
 
-# data_agg <- aggregate(choice ~ color, 
-#                       FUN = sum, 
-#                       data = dataf)
-# data_agg
-# 
-# binom.test(21, 32, alternative = "greater")
-
+# No choice number ----
+choices <- dataf %>% 
+  summarise(sum_no_choice = sum(no_choice),
+            sum_choice = sum(choice))
+choices
 
 #Modelo de regressão binomial ----
 m1 <- glm(choice ~ color, family = binomial, data = dataf)
@@ -39,6 +44,7 @@ check_model(m1) #pacote performance
 dados_resumo <- dataf %>%
   group_by(color) %>%
   summarise(total = sum(choice))
+dados_resumo
 
 dataf %>%
   group_by(color) %>%
