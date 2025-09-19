@@ -5,9 +5,10 @@
 #Packages ----
 library(tidyverse)
 library(cowplot)
-library(ggpubr)
 library(colorspec)
 library(pavo)
+library(ggpubr)
+library(ggdist)
 
 #1. import data ----
 data <- read.csv("data/processed/04_data_master.csv")
@@ -42,7 +43,7 @@ weight_size <- ggplot(data.b, aes(size, weight_mg))+ #a variavel weight_g possiv
        y = "Claw mass (mg)",
        color = "Carapace color")+
   theme_classic(base_size = 24)
-weight_str_size
+weight_size
 
 weight_color <- ggplot(data.b, aes(carapace_type, weight_mg, fill = carapace_type))+
   stat_halfeye(alpha = 0.5, justification = 0, width = 0.5, .width = 0, adjust = 1)+
