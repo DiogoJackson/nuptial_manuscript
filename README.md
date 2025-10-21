@@ -24,7 +24,7 @@ This repository contains the data, scripts, and outputs associated with the manu
     * The figures generated for the manuscript (Figures 2, 3, 4, and 5).
 
 3. __scripts__: the `scripts` folder contains:  
-    * R scripts (.R) to import and clean reflectance and raw data, fit models, and generate Figures 2 and 3 used in the manuscript.
+    * R scripts (.R) to import and clean reflectance and raw data, fit models, and generate figures used in the manuscript.
 
 ### Folder structure
 
