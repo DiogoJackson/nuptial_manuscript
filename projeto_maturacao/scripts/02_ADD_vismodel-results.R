@@ -1,12 +1,14 @@
-#Script to unite vismodel and summary_cor outputs
-#author: Diogo Silva
-#Data: Sat Aug  6 13:39:58 2022 
+# Nuptial coloration in fiddler crab
+# Script to unite datasets
+# Author: Diogo Silva
+# Data: Sat Aug  6 13:39:58 2022 
+# Last update: Tue Oct 21 14:56:36 2025 ------------------------------
 
-#packages ----
+# Packages ----
 library(dplyr)
 
-#Import datasets ----
-#all
+# Import datasets ----
+# all
 vis.all <- read.csv("outputs/tables/01_vis-all.csv")
 summary <- read.csv("outputs/tables/01_summary_cor.csv") %>% 
   rename(ID = ID2) #renomeado ID2 para ID, para ser utilizado na funcao join

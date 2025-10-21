@@ -1,10 +1,9 @@
-# Diogo Thesis
-# Chapter 3 - Nuptial coloration
-# Script to process reflectance data
+# Nuptial coloration in fiddler crab
+# Script to clean reflectance spreadsheet
 # Author: Diogo Silva
 # Date: Mon Jul 18 17:36:55 2022
 # last update:
-# Sun Sep 29 16:17:01 2024 ------------------------------
+# Tue Oct 21 14:48:28 2025 ------------------------------
 
 #Packages ----
 library(pavo)
@@ -15,8 +14,8 @@ library(colorspec) #remotes::install_github("Diogojackson/colorspec/colorspec")
 reflet <- read.csv("data/raw/refletancias/00_refletancias.csv")
 reflet <- fixspec(reflet)
 
-#Separar em refletancias ----
-#Separando quela e carapaça ----
+#Separate into reflectances ----
+#Separating claw and carapace ----
 reflet_q <- reflet %>%
   select(wl, contains("_q_"))
 
@@ -26,12 +25,12 @@ reflet_c <- reflet %>%
 reflet_c2 <- reflet %>%
   select(wl, contains("_c_"), "substrato_barradorio")
 
-#Separando as quelas em Brachychelous and leptochelous ----
+#Separating claws into brachychelous and leptochelous ----
 reflet_claw_type <- reflet_q %>%
   rename(Brachychelous = contains("_brac_")) %>% 
   rename(Leptochelous = contains("_lep_"))
 
-#Separando as carapaças em claro e escuro ----
+#Separating carapaces into bright and dark ----
 reflet_carapace_type <- reflet_c %>%
   rename(Bright = contains("_claro")) %>% 
   rename(Dark = contains("_escuro")) %>% 
@@ -42,7 +41,7 @@ reflet_carapace_type2 <- reflet_c2 %>%
   rename(Dark = contains("_escuro"))%>% 
   rename(Real = contains("_real"))
 
-#Separando as carapaças em claro e escuro ----
+#Separating claws into bright and dark ----
 reflet_claw_color <- reflet_q %>%
   rename(Bright = contains("_claro")) %>% 
   rename(Dark = contains("_escuro"))%>% 

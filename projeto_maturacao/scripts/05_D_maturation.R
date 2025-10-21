@@ -36,35 +36,4 @@ tabela_f
 fisher_f <- fisher.test(tabela_f) ## Para caso tenha muitos valores abaixo de 5
 fisher_f
 
-#GLM tamanho ~ maturidade + cor (plot p2)
-shapiro.test(dados_m$carapace_size)
-shapiro.test(dados_f$carapace_size)
-
-#Using gaussian family ----
-
-#Male ----
-m1.1 <- glm(carapace_size ~ maturation_stage + carapace_color, data = dados_m)
-summary(m1.1)
-vif(m1.1)
-
-#Diagnóstico do modelo ----
-summary(m1.1)
-
-# 2. Gráficos de diagnóstico padrão (base R)
-par(mfrow = c(2, 2))  # Layout 2x2
-plot(m1.1)
-par(mfrow = c(1, 1))  # Volta ao padrão
-
-
-#Female ----
-m2.1 <- glm(carapace_size ~ maturation_stage + carapace_color, data = dados_f)
-summary(m2.1)
-
-#Diagnóstico do modelo ----
-summary(m2.1)
-
-# 2. Gráficos de diagnóstico padrão (base R)
-par(mfrow = c(2, 2))  # Layout 2x2
-plot(m2.1)
-par(mfrow = c(1, 1))  # Volta ao padrão
 #FIM ----

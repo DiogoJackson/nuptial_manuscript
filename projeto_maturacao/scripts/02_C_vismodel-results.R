@@ -1,7 +1,8 @@
-#Script to clean JND
-#author: Diogo Silva
-#Data: Wed Jul 20 11:35:29 2022
-#Last update: Wed Jul 20 14:35:01 2022 ------------------------------
+# Nuptial coloration in fiddler crab
+# Script to clean vismodel data
+# Author: Diogo Silva
+# Data: Wed Jul 20 11:35:29 2022
+# Last update: Wed Jul 20 14:35:01 2022 ------------------------------
 
 # Packages ----
 library(tidyverse)

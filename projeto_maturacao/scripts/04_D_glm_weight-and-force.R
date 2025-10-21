@@ -132,7 +132,6 @@ plot(cooks.distance(m2),
 abline(h = 4 / nrow(data_brac_na), lty = 2, col = "grey50")
 
 
-
 # FIM ---------------------------------------------------------------------
 
 

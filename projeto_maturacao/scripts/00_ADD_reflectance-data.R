@@ -1,8 +1,8 @@
 # Nuptial coloration in fiddler crab
 # Script to create reflectance spreadsheet
 # Author: Diogo Silva
-# date: Mon Jul 18 17:36:55 2022
-# last update:
+# Date: Mon Jul 18 17:36:55 2022
+# Last update:
 # Wed May 21 08:06:47 2025 ------------------------------
 
 #Packages ----

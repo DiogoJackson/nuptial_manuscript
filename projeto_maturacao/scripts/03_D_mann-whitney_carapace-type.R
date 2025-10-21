@@ -90,6 +90,11 @@ boxplot(data_cara$m ~ data_cara$carapace_type)
 cara_m <- wilcox.test(data_cara$m ~ data_cara$carapace_type)
 cara_m
 
+# Carapace size ----
+boxplot(data_cara$size ~ data_cara$carapace_type)
+cara_m <- wilcox.test(data_cara$size ~ data_cara$carapace_type)
+cara_m
+
 #Converting tables ----
 table_claw_s <- broom::tidy(claw_s) %>% 
   mutate(body_region = "Claw") %>% 

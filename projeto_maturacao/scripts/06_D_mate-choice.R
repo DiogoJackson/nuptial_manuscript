@@ -74,7 +74,7 @@ p1
 
 #Save figure
 ggsave(p1,
-       filename = "outputs/figures/mate_choice.png",
+       filename = "outputs/figures/Figure_5_mate-choice.png",
        width = 4, 
        height = 4,
        dpi = 300)

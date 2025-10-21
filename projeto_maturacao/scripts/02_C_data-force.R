@@ -1,9 +1,10 @@
-#Script to clean data_force
-#author: Diogo Silva
-#Data: Wed Jul 20 15:46:02 2022
-#Last update: Wed Jul 20 15:46:02 2022
+# Nuptial coloration in fiddler crab
+# Script to clean data force
+# Author: Diogo Silva
+# Data: Wed Jul 20 15:46:02 2022
+# Last update: Wed Jul 20 15:46:02 2022
 
-#packages ----
+# Packages ----
 library(tidyverse)
 library(readxl)
 
@@ -78,4 +79,4 @@ str(dat_test)
 head(dat_test)
 nrow(dat_test)
 
-# FIM ---------------------------------------------------------------------
+# THE END ---------------------------------------------------------------------

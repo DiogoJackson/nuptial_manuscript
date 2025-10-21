@@ -1,13 +1,14 @@
 #Script para fazer os graficos das diferenças de carapaça nupcial e escura
 #Author: Diogo Silva
-# Fri Dec 23 17:40:13 2022 ------------------------------
+# Tue Sep  9 11:10:31 2025 ------------------------------
 
 #Packages ----
 library(tidyverse)
 library(cowplot)
-library(ggpubr)
 library(colorspec)
 library(pavo)
+library(ggpubr)
+library(ggdist)
 
 #1. import data ----
 data <- read.csv("data/processed/04_data_master.csv")
@@ -35,20 +36,44 @@ data.b <- data_brac %>%
                                     "Dark" = "Dark",
                                     "White" = "Bright"))
 
-weight_size <- ggplot(data.b, aes(size, weight_mg, color = carapace_type))+ #a variavel weight_g possivelmente eh weight_mg
-  geom_point(alpha = 0.7, size = 4)+
-  geom_smooth(method = "glm", se = FALSE, size = 1.5)+
-  scale_color_manual(values = c("#ffb560", 
-                                "#404244"))+
-  labs(x = "Claw size (mm)",
-       y = "Claw mass (mg)",
-       color = "Carapace color")+
-  theme_classic(base_size = 24)
-weight_size
 
-str_weight_size <- ggplot(data.b, aes(x = weight_mg, y = max_force, color = carapace_type, size = size)) +
-  geom_point(alpha = 0.7) +
-  geom_smooth(method = "glm", se = FALSE, size = 1.5) +
+
+p1 <- ggplot(data.b, aes(carapace_type, weight_mg, fill = carapace_type))+
+  stat_halfeye(alpha = 0.5, justification = 0, width = 0.5, .width = 0, adjust = 1)+
+  stat_dots(aes(color = carapace_type),side = "left",justification = 1, binwidth = 2)+
+  geom_boxplot(width = 0.15, show.legend = F, fill = "white")+
+  scale_fill_manual(values=c("#ffb560","grey30"))+
+  scale_color_manual(values=c("#ffb560","grey30"))+
+  labs(x = "Carapace color",
+       y = "Claw mass (mg)")+
+  theme_classic(base_size = 24)+
+  theme(legend.position = "none")+
+  annotate("text", x = 1.5, y = 60, label = "*", size = 10)
+p1
+
+p2 <- ggplot(data.b, aes(carapace_type, max_force, fill = carapace_type))+
+  stat_halfeye(alpha = 0.5, justification = 0, width = 0.5, .width = 0, adjust = 1)+
+  stat_dots(aes(color = carapace_type),side = "left",justification = 1, binwidth = 0.5)+
+  geom_boxplot(width = 0.15, show.legend = F, fill = "white")+
+  scale_fill_manual(values=c("#ffb560","grey30"))+
+  scale_color_manual(values=c("#ffb560","grey30"))+
+  labs(x = "Carapace color",
+       y = "Maximum force (N)")+
+  theme_classic(base_size = 24)+
+  theme(legend.position = "none")
+p2
+
+p3 <- ggplot(data.b, aes(size, weight_mg))+ #a variavel weight_g possivelmente eh weight_mg
+  geom_point(alpha = 0.6, size = 5)+
+  geom_smooth(method = "glm", se = FALSE, size = 3, color = "orange", linetype = "dashed")+
+  labs(x = "Claw size (mm)",
+       y = "Claw mass (mg)")+
+  theme_classic(base_size = 24)
+p3
+
+p4 <- ggplot(data.b, aes(x = weight_mg, y = max_force)) +
+  geom_point(alpha = 0.6, size = 5) +
+  geom_smooth(method = "glm", se = FALSE, size = 3, color = "orange", linetype = "dashed") +
   scale_color_manual(values = c("#ffb560", "#404244")) +
   labs(
     x = "Claw mass (mg)",
@@ -57,21 +82,32 @@ str_weight_size <- ggplot(data.b, aes(x = weight_mg, y = max_force, color = cara
     size = "Claw size (mm)"
   ) +
   theme_classic(base_size = 24)
-str_weight_size
+p4
 
+p5 <- ggplot(data.b, aes(x = max_force, y = size)) +
+  geom_point(alpha = 0.6, size = 5) +
+  geom_smooth(method = "glm", se = FALSE, size = 3, color = "orange", linetype = "dashed") +
+  scale_color_manual(values = c("#ffb560", "#404244")) +
+  labs(
+    x = "Claw size (mm)",
+    y = "Maximum force (N)") +
+  theme_classic(base_size = 24)
+p5
 
 #Figure 1 ----
-fig3 <- plot_grid(weight_size, str_weight_size,
-                  ncol = 1,
+fig3 <- plot_grid(p1, p2, p3, p4, p5,
+                  ncol = 2,
                   labels = "AUTO",
-                  align = "vh",
-                  label_size = 15)
+                  align = "AUTO",
+                  label_size = 22)
 fig3
 
 #Save plots ----
 ggsave(plot = fig3, 
-       filename = "outputs/figures/Figure_3_clawmass.png",
-       width = 8.5, 
-       height = 10, 
+       filename = "outputs/figures/Figure_3_morphofunctional-traits.png",
+       width = 14, 
+       height = 18, 
        dpi = 300)
+
+# FIM ---------------------------------------------------------------------
 

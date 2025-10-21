@@ -1,7 +1,6 @@
-# Diogo Thesis
-# Chapter 3 - Nuptial coloration
-# Script to to the visual model
-# author: Diogo Silva
+# Nuptial coloration in fiddler crab
+# Script to do the visual
+# Author: Diogo Silva
 # Date: Wed Jul 20 11:35:29 2022
 # Sun Sep 29 16:35:18 2024 ------------------------------
 
