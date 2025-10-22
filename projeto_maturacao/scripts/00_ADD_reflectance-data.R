@@ -11,7 +11,7 @@ library(pavo)
 library(colorspec) #To install `colorspec` use: remotes::install_github("Diogojackson/colorspec/colorspec")
 
 #Import procspec data ----
-refletancias <- getspec("data/raw/refletancias",                 
+refletancias <- getspec("data/raw/reflectances",                 
                                 ext=c("procspec","txt"), 
                                 decimal=",", 
                                 lim=c(300,700))

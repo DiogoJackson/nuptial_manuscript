@@ -152,7 +152,7 @@ p2
 
 #reflectances ----
 ggsave(plot = p2, 
-       filename = "outputs/figures/figure_2_vismodel.png",
+       filename = "outputs/figures/Figure_2_vismodel.png",
        width = 6, 
        height = 8, 
        dpi = 300)
