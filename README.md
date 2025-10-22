@@ -1,4 +1,5 @@
 # 🦀 Nuptial coloration in fiddler crabs as an indicator of reproductive quality 🦀
+[![DOI](https://zenodo.org/badge/971561730.svg)](https://doi.org/10.5281/zenodo.17410848)
    
 _Diogo J. A. Silva & Daniel M. A. Pessoa_
      
@@ -86,7 +87,11 @@ For any further information, contact: **diogojackson@hotmail.com**
 
 > ****
    
+**Dataset DOI:**
+   
+[![DOI](https://zenodo.org/badge/971561730.svg)](https://doi.org/10.5281/zenodo.17410848)
+   
+> Diogo Silva. (2025). DiogoJackson/nuptial_manuscript: First release (FirstRelease). Zenodo. https://doi.org/10.5281/zenodo.17410849
+
 ***
-
-
 
