@@ -6,8 +6,6 @@
 library(tidyverse)
 library(cowplot)
 library(ggpubr)
-library(glmmTMB) #beta regression
-library(foreign) #Vif
 library(car)
 library(fitdistrplus)
 library(caret)
@@ -43,7 +41,7 @@ data_brac_na <- data_brac %>%
 m1 <- glm(weight_mg ~ size + carapace_color, 
           family = "gaussian", data = data_brac_na)
 
-vif(m1) # Verifica colinearidade
+car::vif(m1) # Verifica colinearidade
 summary(m1)
 
 

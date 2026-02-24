@@ -65,7 +65,7 @@ p2
 
 p3 <- ggplot(data.b, aes(size, weight_mg))+ #a variavel weight_g possivelmente eh weight_mg
   geom_point(alpha = 0.6, size = 5)+
-  geom_smooth(method = "glm", se = FALSE, size = 3, color = "orange", linetype = "dashed")+
+  geom_smooth(method = "glm", se = FALSE, size = 1.5, color = "orange", linetype = "solid")+
   labs(x = "Claw size (mm)",
        y = "Claw mass (mg)")+
   theme_classic(base_size = 24)
@@ -73,7 +73,7 @@ p3
 
 p4 <- ggplot(data.b, aes(x = weight_mg, y = max_force)) +
   geom_point(alpha = 0.6, size = 5) +
-  geom_smooth(method = "glm", se = FALSE, size = 3, color = "orange", linetype = "dashed") +
+  geom_smooth(method = "glm", se = FALSE, size = 1.5, color = "orange", linetype = "solid") +
   scale_color_manual(values = c("#ffb560", "#404244")) +
   labs(
     x = "Claw mass (mg)",
@@ -86,7 +86,7 @@ p4
 
 p5 <- ggplot(data.b, aes(x = max_force, y = size)) +
   geom_point(alpha = 0.6, size = 5) +
-  geom_smooth(method = "glm", se = FALSE, size = 3, color = "orange", linetype = "dashed") +
+  geom_smooth(method = "glm", se = FALSE, size = 1.5, color = "orange") +
   scale_color_manual(values = c("#ffb560", "#404244")) +
   labs(
     x = "Claw size (mm)",

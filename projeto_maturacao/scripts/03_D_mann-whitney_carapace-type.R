@@ -12,6 +12,10 @@ library(broom)
 
 # Import data -------------------------------------------------------------
 data <- read.csv("data/processed/04_data_master.csv")
+data %>% 
+  filter(vismodel == "Fiddler crab") %>% 
+  filter(body_region == "Carapace") %>% 
+  count(claw_type, name = "N")
 
 #Contando o N
 data_cara <- data %>% 

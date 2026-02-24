@@ -134,7 +134,7 @@ m <- ggplot(data_brac2, aes(carapace_type, m, fill = carapace_type))+
 m
 
 #plot grid ----
-p <- plot_grid(claw,cara,
+p <- plot_grid(cara,claw,
                ncol = 2,
                align = "v",
                label_size = 15)
