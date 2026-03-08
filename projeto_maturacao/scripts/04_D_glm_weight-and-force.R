@@ -1,8 +1,9 @@
-#Script para fazer os graficos das diferenças de carapaça nupcial e escura
-#Author: Diogo Silva
+# Nuptial coloration in fiddler crabs as an indicator of reproductive quality
+# Script for generating graphs of the differences between nuptial and dark carapaces
+# Author: Diogo Silva
 # Fri Dec 23 17:40:13 2022 ------------------------------
 
-#Packages ----
+# Packages ----
 library(tidyverse)
 library(cowplot)
 library(ggpubr)
@@ -14,8 +15,8 @@ library(caret)
 data <- read.csv("data/processed/04_data_master.csv")
 glimpse(data)
 
-#2. Analisando tipo de quela ------------------------------------------------------
-#subset da modelagem visual do caranguejo considerando apenas os valores de quela
+#2. Analyzing claw type ------------------------------------------------------
+#subset of the crab visual model considering only the claw values
 data_qt <- data %>% 
   filter(vismodel == "Fiddler crab") %>% 
   filter(body_region == "Claw") #qt = quela type
@@ -31,31 +32,32 @@ data_cara <- data %>%
   filter(claw_type == "Brachychelous")
 
 # Fitting model for claw weight ----
-# GLM peso da quela ----
+# GLM for claw weight ----
 
-# Remover NAs da variável de interesse
+# Remove NAs from the variable of interest
 data_brac_na <- data_brac %>%
   filter(!is.na(weight_mg))
 
-# Modelo final
+# Final model
 m1 <- glm(weight_mg ~ size + carapace_color, 
           family = "gaussian", data = data_brac_na)
 
-car::vif(m1) # Verifica colinearidade
+car::vif(m1) # Check collinearity
 summary(m1)
 
 
-# Diagnósticos do modelo final ----
-par(mfrow = c(2, 2))  # Exibe os 4 gráficos de diagnóstico padrão
-plot(m1)            # Diagnóstico visual: resíduos, leverage, etc.
+# Final model diagnostics ----
+par(mfrow = c(2, 2))  # Display the 4 standard diagnostic plots
+plot(m1)              # Visual diagnostics: residuals, leverage, etc.
 
-# Reset layout gráfico (opcional)
+# Reset graphical layout (optional)
 par(mfrow = c(1, 1))
 
 
 # Fitting gamma regression ----
 
-# Devido a multicolinearidade (vif > 5) de luminance e brilho medio, luminance foi retirado do modelo
+# Due to multicollinearity (VIF > 5) between luminance and mean brightness,
+# luminance was removed from the model
 m2 <- glm(max_force ~ 
               size + 
               carapace_color +
@@ -67,7 +69,8 @@ summary(m2)
 
 # Fitting gamma regression ----
 
-# Devido a multicolinearidade (vif > 5) de luminance e brilho medio, luminance foi retirado do modelo
+# Due to multicollinearity (VIF > 5) between luminance and mean brightness,
+# luminance was removed from the model
 m2 <- glm(max_force ~ 
             size + 
             carapace_color +
@@ -77,16 +80,16 @@ m2 <- glm(max_force ~
 vif(m2) #it's all good
 summary(m2)
 
-# Diagnóstico do modelo final
+# Final model diagnostics
 
-# Resíduos de Pearson
+# Pearson residuals
 resid_pearson <- resid(m2, type = "pearson")
 fitted_vals <- fitted(m2)
 
-# Configurar layout de 2x2
+# Set 2x2 layout
 par(mfrow = c(2, 2))
 
-# 1. Resíduos de Pearson vs valores ajustados
+# 1. Pearson residuals vs fitted values
 plot(fitted_vals, resid_pearson,
      main = "Resíduos de Pearson vs Ajustados",
      xlab = "Valores ajustados",
@@ -94,13 +97,13 @@ plot(fitted_vals, resid_pearson,
      pch = 16, col = "grey40")
 abline(h = 0, lty = 2, col = "red")
 
-# 2. Q-Q plot dos resíduos de Pearson
+# 2. Q-Q plot Pearson residuals
 qqnorm(resid_pearson,
        main = "Q-Q plot dos resíduos de Pearson",
        pch = 16, col = "grey40")
 qqline(resid_pearson, col = "red", lty = 2)
 
-# 3. Scale-Location (variância dos resíduos)
+# 3. Scale-Location (residual variance)
 sqrt_abs_resid <- sqrt(abs(resid_pearson))
 plot(fitted_vals, sqrt_abs_resid,
      main = "Scale-Location",
@@ -109,7 +112,7 @@ plot(fitted_vals, sqrt_abs_resid,
      pch = 16, col = "grey40")
 abline(h = 0, lty = 2, col = "red")
 
-# 4. Resíduos de Pearson vs leverage
+# 4. Pearson residuals vs leverage
 leverage <- hatvalues(m2)
 plot(leverage, resid_pearson,
      main = "Resíduos de Pearson vs Leverage",
@@ -118,10 +121,10 @@ plot(leverage, resid_pearson,
      pch = 16, col = "grey40")
 abline(h = 0, lty = 2, col = "red")
 
-# Reset layout gráfico
+# Reset graphical layout
 par(mfrow = c(1, 1))
 
-# Distância de Cook (opcional)
+# cooks distances (opcional)
 plot(cooks.distance(m2),
      type = "h",
      main = "Distância de Cook",
@@ -130,6 +133,6 @@ plot(cooks.distance(m2),
 abline(h = 4 / nrow(data_brac_na), lty = 2, col = "grey50")
 
 
-# FIM ---------------------------------------------------------------------
+# THE END ---------------------------------------------------------------------
 
 

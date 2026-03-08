@@ -1,3 +1,4 @@
+# Nuptial coloration in fiddler crabs as an indicator of reproductive quality
 # Color signal comparation - bright vs dark carapace
 # Author: Diogo J. A. Silva
 # Date:
@@ -36,7 +37,7 @@ reflet_cara <- fixspec(reflet_cara)
 reflet_claw <- read.csv("data/processed/01_reflet_claw_color.csv")
 reflet_claw <- fixspec(reflet_claw)
 
-#Plot means - claw ----
+# Plot means - claw ----
 claw <- reflet_claw %>%
   rowwise() %>%
   
@@ -67,7 +68,7 @@ claw <- reflet_claw %>%
   geom_text(x = 500, y = 55, label = "Claw", color = "black", size = 4)
 claw
 
-#Plot means - carapace ----
+# Plot means - carapace ----
 cara <- reflet_cara %>%
   rowwise() %>%
   
@@ -106,7 +107,7 @@ data_brac2 <- data_brac %>%
                                     "Darkened white" = "Bright")) %>% 
   filter(carapace_type != "Darkened white")
 
-#Figure 3 ----
+# Figure 3 ----
 s <- ggplot(data_brac2, aes(carapace_type, s, fill = carapace_type))+
   stat_halfeye(alpha = 0.5, justification = 0, width = 0.5, .width = 0, adjust = 1)+
   stat_dots(aes(color = carapace_type),side = "left",justification = 1, binwidth = 0.006)+
@@ -133,7 +134,7 @@ m <- ggplot(data_brac2, aes(carapace_type, m, fill = carapace_type))+
   facet_grid(~body_region)
 m
 
-#plot grid ----
+# Plot grid ----
 p <- plot_grid(cara,claw,
                ncol = 2,
                align = "v",
@@ -148,7 +149,7 @@ p2 <- plot_grid(p,
                label_size = 15)
 p2
 
-#Saving plots ----
+# Saving plots ----
 
 #reflectances ----
 ggsave(plot = p2, 
@@ -158,6 +159,6 @@ ggsave(plot = p2,
        dpi = 300)
 
 
-# FIM ---------------------------------------------------------------------
+# THE END ---------------------------------------------------------------------
 
 

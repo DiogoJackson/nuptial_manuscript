@@ -1,6 +1,6 @@
-# Nuptial coloration in fiddler crab
+# Nuptial coloration in fiddler crabs as an indicator of reproductive quality
 # Script to analyze mate choice data (white males vs dark males)
-# Author: Diogo Silva
+# Author: Diogo J. A. Silva
 # date: Mon Jul 18 17:36:55 2022
 # last update:
 # Tue Sep  9 09:34:14 2025 ------------------------------
@@ -12,7 +12,7 @@ library(colorspec)
 library(readxl)
 library(performance)
 
-#Import procspec data ----
+# Import procspec data ----
 refletancias <- getspec("data/raw/refletancias_modelo",                 
                         ext=c("procspec","txt"), 
                         decimal=",", 
@@ -20,7 +20,7 @@ refletancias <- getspec("data/raw/refletancias_modelo",
 
 explorespec(refletancias)
 
-#Mate choice data ----
+# Mate choice data ----
 data <- read_xlsx("data/raw/mate_choice.xlsx")
 data
 
@@ -33,12 +33,12 @@ choices <- dataf %>%
             sum_choice = sum(choice))
 choices
 
-#Modelo de regressão binomial ----
+# Binomial regression model ----
 m1 <- glm(choice ~ color, family = binomial, data = dataf)
 summary(m1)
 
-#Diagnóstico do modelo ----
-check_model(m1) #pacote performance
+# Model diagnostics ----
+check_model(m1) #performance package
 
 #grafico de donut ----
 dados_resumo <- dataf %>%
@@ -50,13 +50,13 @@ dataf %>%
   group_by(color) %>%
   count()
 
-# Calcular proporção para o gráfico de donut
+# Calculate proportion for the donut chart
 dados_resumo$fraction <- dados_resumo$total / sum(dados_resumo$total)
 
-# Adicionar a posição para o label no centro das fatias
+# Add the position for the label at the center of the slices
 dados_resumo$ypos <- cumsum(dados_resumo$fraction) - 0.4 * dados_resumo$fraction
 
-# Criar o gráfico de donut com legenda
+# Create the donut chart with legend
 p1 <- ggplot(dados_resumo, aes(x = 2, y = fraction, fill = color)) +  # Definindo x = 2 para criar o buraco
   geom_bar(width = 1, stat = "identity", color = "white") +
   coord_polar("y", start = 0) +
@@ -72,11 +72,11 @@ p1 <- ggplot(dados_resumo, aes(x = 2, y = fraction, fill = color)) +  # Definind
   )
 p1
 
-#Save figure
+# Saving figure ----
 ggsave(p1,
-       filename = "outputs/figures/Figure_5_mate-choice.png",
+       filename = "outputs/figures/Figure_mate-choice.png",
        width = 4, 
        height = 4,
        dpi = 300)
 
-# FIM ---------------------------------------------------------------------
+# THE ---------------------------------------------------------------------

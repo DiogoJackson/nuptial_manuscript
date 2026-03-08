@@ -1,4 +1,4 @@
-# Nuptial coloration in fiddler crab
+# Nuptial coloration in fiddler crabs as an indicator of reproductive quality
 # Script to create reflectance spreadsheet
 # Author: Diogo Silva
 # Date: Mon Jul 18 17:36:55 2022
@@ -20,11 +20,11 @@ refletancias <- colorspec::fixspec(refletancias)
 
 #Save reflectances ----
 write.csv(refletancias,
-          "data/raw/refletancias/00_refletancias.csv", 
+          "data/raw/reflectances/00_refletancias.csv", 
           row.names = FALSE)
 
 #test saved data ----
-reflet_test <- read.csv("data/raw/refletancias/00_refletancias.csv")
+reflet_test <- read.csv("data/raw/reflectances/00_refletancias.csv")
 reflet_test <- fixspec(reflet_test)
 head(reflet_test)
 

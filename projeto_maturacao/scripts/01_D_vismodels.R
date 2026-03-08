@@ -1,4 +1,4 @@
-# Nuptial coloration in fiddler crab
+# Nuptial coloration in fiddler crabs as an indicator of reproductive quality
 # Script to do the visual
 # Author: Diogo Silva
 # Date: Wed Jul 20 11:35:29 2022
@@ -11,7 +11,7 @@ library(colorspec)
 
 #Import reflectances ----
 #All
-reflet <- read.csv("data/raw/refletancias/00_refletancias.csv")
+reflet <- read.csv("data/raw/reflectances/00_refletancias.csv")
 reflet <- fixspec(reflet)
 
 reflet_cara <- read.csv("data/processed/01_reflet_carapace_with_background.csv")

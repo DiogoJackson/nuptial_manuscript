@@ -1,4 +1,4 @@
-# Nuptial coloration in fiddler crab
+# Nuptial coloration in fiddler crabs as an indicator of reproductive quality
 # Script to clean data force
 # Author: Diogo Silva
 # Data: Wed Jul 20 15:46:02 2022

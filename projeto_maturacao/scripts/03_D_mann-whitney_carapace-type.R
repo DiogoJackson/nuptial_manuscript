@@ -1,3 +1,4 @@
+# Nuptial coloration in fiddler crabs as an indicator of reproductive quality
 # Statitics color signal comparation
 # Author: Diogo J. A. Silva
 # Date:
@@ -48,7 +49,7 @@ data %>%
   filter(claw_type == "Brachychelous") %>% 
   count(carapace_type)
 
-# Teste de normalidade ----
+# Shapiro test ----
 sw_s <- data_brac %>% 
   dplyr::group_by(carapace_color, body_region) %>% 
   rstatix::shapiro_test(s)
@@ -59,18 +60,18 @@ sw_m <- data_brac %>%
   rstatix::shapiro_test(m)
 sw_m
 
-#Levene test 
+# Levene test ----
 lv_s <- data_brac %>% 
-  group_by(body_region) %>%  # Faz um teste para cada região do corpo
-  levene_test(s ~ carapace_color)  # Testa se a variância de "s" difere entre as cores
+  group_by(body_region) %>%  # Perform a test for each body region.
+  levene_test(s ~ carapace_color)  # Test whether the variance of "s" differs between the colors.
 lv_s
 
 lv_m <- data_brac %>% 
-  group_by(body_region) %>%  # Faz um teste para cada região do corpo
-  levene_test(m ~ carapace_color)  # Testa se a variância de "m" difere entre as cores
+  group_by(body_region) %>%  
+  levene_test(m ~ carapace_color) 
 lv_m
 
-#Mann-whitney test
+# Mann-whitney test ----
 
 #Short photoreceptor (s)
 #Claw comparation
@@ -120,9 +121,9 @@ table_cara_m <- broom::tidy(cara_m)%>%
   mutate(variable = "medium_qi") %>% 
   mutate(comparation = "Bright_vs_Dark")
 
-#Uniting tables
+# Merging tables
 
-#Shapiro
+# Shapiro
 shapiro_table <- bind_rows(sw_s,
                            sw_m
 ) %>% 
@@ -131,7 +132,7 @@ shapiro_table <- bind_rows(sw_s,
                                 "non-normal"))
 shapiro_table
 
-#Mann-whitney
+# Mann-whitney ----
 mw_result <- bind_rows(table_claw_s,
                        table_cara_s,
                        table_claw_m,
@@ -141,7 +142,7 @@ mw_result <- bind_rows(table_claw_s,
 
 mw_result
 
-#Save results ----
+# Saving results ----
 write.csv(shapiro_table,
           "outputs/tables/shapiro_test_result.csv",
           row.names = F)

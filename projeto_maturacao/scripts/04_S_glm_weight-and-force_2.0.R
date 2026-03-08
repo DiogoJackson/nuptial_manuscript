@@ -1,4 +1,5 @@
-# Script para fazer os graficos das diferenças de carapaça nupcial e escura
+# Nuptial coloration in fiddler crabs as an indicator of reproductive quality
+# Script for generating graphs of the differences between nuptial and dark carapaces
 # Author: Diogo Silva
 # Tue Sep  9 11:10:31 2025 ------------------------------
 
@@ -16,7 +17,7 @@ head(data)
 str(data)
 
 # 2. Subsets ---------------------------------------------------------------
-# subset da modelagem visual do caranguejo considerando apenas os valores de quela
+# Subset of the crab visual model considering only the claw values
 data_brac <- data %>%
   filter(
     vismodel == "Fiddler crab",
@@ -31,15 +32,15 @@ data_cara <- data %>%
     claw_type == "Brachychelous"
   )
 
-# 3. Preparar dados para figura (remover "Real" e garantir variáveis) -------
+# 3. Prepare data for the figure (remove "Real" and ensure variables)
 data_brac_na <- data_brac %>%
-  filter(carapace_type != "Real") %>%  # retirar os animais medidos em campo (sem força/peso etc.)
+  filter(carapace_type != "Real") %>%  # Remove individuals measured in the field (without force/weight, etc.)
   mutate(
     force.b = max_force / (max(max_force, na.rm = TRUE) + 0.001)
   )
 
-# Padronizar variável de cor em "carapace_color" (fator)
-# Se já existir carapace_color, usa ela. Senão, cria a partir de carapace_type (Bright/Dark -> Light/Dark)
+# Standardize the color variable as "carapace_color" (factor)
+# If carapace_color already exists, use it. Otherwise, create it from carapace_type (Bright/Dark -> Light/Dark)
 if ("carapace_color" %in% names(data_brac_na)) {
   data_brac_na <- data_brac_na %>%
     mutate(carapace_color = as.factor(carapace_color))
@@ -52,7 +53,7 @@ if ("carapace_color" %in% names(data_brac_na)) {
     )
 }
 
-# Remover linhas com NA / não-finitos nas variáveis que serão usadas nos modelos/plots
+# Remove rows with NA / non-finite values in the variables that will be used in the models/plots
 data_brac_na <- data_brac_na %>%
   filter(
     is.finite(max_force),
@@ -62,7 +63,7 @@ data_brac_na <- data_brac_na %>%
   ) %>%
   droplevels()
 
-# Versão para os box/halfeye usando rótulos "White/Dark" como no seu layout
+# Version for the box/halfeye plots using labels "White/Dark" as in your layout
 data.b <- data_brac_na %>%
   mutate(
     carapace_type = fct_recode(as.factor(carapace_color),
@@ -70,7 +71,7 @@ data.b <- data_brac_na %>%
                                "White" = "Bright")
   )
 
-# Helper: função para gerar predições + IC95% no response para GLM Gamma(log) ----
+# Helper: function to generate predictions + 95% CI on the response scale for a Gamma(log) GLM ----
 predict_glm_gamma_log <- function(model, newdata) {
   pr <- predict(model, newdata = newdata, type = "link", se.fit = TRUE)
   newdata %>%
@@ -81,26 +82,26 @@ predict_glm_gamma_log <- function(model, newdata) {
     )
 }
 
-# Nível de referência (primeiro nível do fator) para fixar nos efeitos parciais
+# Reference level (first factor level) to fix in partial effects
 ref_color <- levels(data_brac_na$carapace_color)[1]
 
 # 4. Modelos (um para cada relação) ----------------------------------------
 
-# (A) Modelo do artigo: max_force ~ size + color + weight
+# (A) Article model: max_force ~ size + color + weight
 m_force <- glm(
   max_force ~ size + carapace_color + weight_mg,
   family = Gamma(link = "log"),
   data = data_brac_na
 )
 
-# (B) Modelo para massa: weight ~ size + color
+# (B) Model for mass: weight ~ size + color
 m_mass <- glm(
   weight_mg ~ size + carapace_color,
   family = Gamma(link = "log"),
   data = data_brac_na
 )
 
-# (C) Modelo para força vs massa (controlando tamanho e cor):
+# (C) Model for force vs mass (controlling for size and color):
 #     max_force ~ weight + size + color
 m_force_mass <- glm(
   max_force ~ weight_mg + size + carapace_color,
@@ -108,14 +109,14 @@ m_force_mass <- glm(
   data = data_brac_na
 )
 
-# Se quiser checar outputs:
+# Checking outputs
 summary(m_force)
 summary(m_mass)
 summary(m_force_mass)
 
-# 5. Figuras ---------------------------------------------------------------
+# 5. Figures ---------------------------------------------------------------
 
-# p1: peso por cor (BOXPLOT/HALFEYE) -> mantém como está (sem "plotar modelo")
+# p1: weight by color (BOXPLOT/HALFEYE) -> keep as is (without "plotting the model")
 p1 <- ggplot(data.b, aes(carapace_type, weight_mg, fill = carapace_type)) +
   stat_halfeye(alpha = 0.5, justification = 0, width = 0.5, .width = 0, adjust = 1) +
   stat_dots(aes(color = carapace_type), side = "left", justification = 1, binwidth = 2) +
@@ -130,7 +131,7 @@ p1 <- ggplot(data.b, aes(carapace_type, weight_mg, fill = carapace_type)) +
   theme(legend.position = "none") +
   annotate("text", x = 1.5, y = 80, label = "*", size = 15)
 
-# p2: força por cor (BOXPLOT/HALFEYE) -> mantém como está (sem "plotar modelo")
+# p2: force by color (BOXPLOT/HALFEYE) -> keep as is (without "plotting the model")
 p2 <- ggplot(data.b, aes(carapace_type, max_force, fill = carapace_type)) +
   stat_halfeye(alpha = 0.5, justification = 0, width = 0.5, .width = 0, adjust = 1) +
   stat_dots(aes(color = carapace_type), side = "left", justification = 1, binwidth = 0.5) +
@@ -144,8 +145,8 @@ p2 <- ggplot(data.b, aes(carapace_type, max_force, fill = carapace_type)) +
   theme_classic(base_size = 24) +
   theme(legend.position = "none")
 
-# p3: MASSA ~ TAMANHO (com modelo) -----------------------------------------
-# Predição parcial: varia size, fixa carapace_color e (nada mais)
+# p3: MASS ~ SIZE (with model) -----------------------------------------
+# Partial prediction: vary size, fix carapace_color (and nothing else)
 newdat_p3 <- data.frame(
   size = seq(min(data_brac_na$size, na.rm = TRUE),
              max(data_brac_na$size, na.rm = TRUE),
@@ -175,8 +176,8 @@ p3 <- ggplot(data_brac, aes(x = size, y = weight_mg)) +
   ) +
   theme_classic(base_size = 24)
 
-# p4: FORÇA ~ MASSA (com modelo) -------------------------------------------
-# Predição parcial: varia weight_mg, fixa size (mediana) e cor
+# p4: FORCE ~ MASS (with model) -------------------------------------------
+# Partial prediction: vary weight_mg, fix size (median) and color
 newdat_p4 <- data.frame(
   weight_mg = seq(min(data_brac_na$weight_mg, na.rm = TRUE),
                   max(data_brac_na$weight_mg, na.rm = TRUE),
@@ -207,8 +208,8 @@ p4 <- ggplot(data_brac, aes(x = weight_mg, y = max_force)) +
   ) +
   theme_classic(base_size = 24)
 
-# p5: FORÇA ~ TAMANHO (com modelo do artigo) --------------------------------
-# Predição parcial: varia size, fixa weight_mg (mediana) e cor
+# p5: FORCE ~ SIZE (with the article model) --------------------------------
+# Partial prediction: vary size, fix weight_mg (median) and color
 newdat_p5 <- data.frame(
   size = seq(min(data_brac_na$size, na.rm = TRUE),
              max(data_brac_na$size, na.rm = TRUE),
@@ -250,7 +251,7 @@ fig3 <- plot_grid(
 
 fig3
 
-# Save plots ----
+# Saving plot ----
 ggsave(
   plot = fig3,
   filename = "outputs/figures/Figure_3_morphofunctional-traits.png",
@@ -259,4 +260,4 @@ ggsave(
   dpi = 300
 )
 
-# FIM ---------------------------------------------------------------------
+# THE END ---------------------------------------------------------------------

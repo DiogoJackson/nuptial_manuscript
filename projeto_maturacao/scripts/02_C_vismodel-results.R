@@ -1,4 +1,4 @@
-# Nuptial coloration in fiddler crab
+# Nuptial coloration in fiddler crabs as an indicator of reproductive quality
 # Script to clean vismodel data
 # Author: Diogo Silva
 # Data: Wed Jul 20 11:35:29 2022
@@ -22,7 +22,7 @@ head(vis_results)             # First rows
 any(duplicated(vis_results))  # There is any duplicated rows?
 any(is.na(vis_results))       # There are NAs in the data?
 
-# Adicionando variáveis ----
+# Adding variables ----
 vis_results <- vis_results %>%
   mutate(
     body_region = case_when(
@@ -45,13 +45,13 @@ vis_results <- vis_results %>%
 
 head(vis_results)
 
-#save table JND Uca-pavo ----
+# Saving table JND Uca-pavo ----
 write.csv(vis_results,
           "outputs/tables/02_vis.results.clean.csv",
           row.names = F)
 
-#test tables ----
+# Testing tables ----
 vis_results_test  <- read.csv("outputs/tables/02_vis.results.clean.csv")
 head(vis_results_test)
 
-# FIM ---------------------------------------------------------------------
+# THE END ---------------------------------------------------------------------
