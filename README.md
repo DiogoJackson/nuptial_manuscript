@@ -4,7 +4,7 @@
 _Diogo J. A. Silva & Daniel M. A. Pessoa_
      
 ***
-**Status**: Submitted
+**Status**: Accepted
    
 **Journal**: [Behavioral Ecology](https://academic.oup.com/beheco)
 
@@ -31,12 +31,42 @@ This repository contains the data, scripts, and outputs associated with the manu
 
 -   📁 data
     -   📁 raw
-        -   📁 nuptial_reflectance (contains crab reflectance spectra from field measurements)
+        -   📁 nuptial_reflectance (contains crab reflectance spectra in procspec files from field measurements)
         -   📁 reflectances (contains crab reflectance spectra from both field and lab measurements)
         -   📁 reflectancias_modelo (contains crab model reflectance spectra)
-        -   🟩 dados_maturidade.xlsx (raw data spreadsheet from the gonadal maturity experiment)
-        -   🟩 data_force.xlsx (raw data spreadsheet from the lab measurements)
-        -   🟩 mate_choice.xlsx (raw data spreadsheet from the mate choice experiment)
+        -   🟩 dados_maturidade.xlsx (raw data spreadsheet from the gonadal maturity experiment)   
+            __Variables__:   
+            [_ID_]: ID of individual crabs.   
+            [_sexo_]: sex of the crabs (male and female)   
+            [_cor_]: color of the crabs (a = yellow, b = white or bright, e = dark carapace).   
+            [_quela_h_]: claw lenght (mm)   
+            [_quela_v_]: claw width (mm)   
+            [_cara_h_]: carapace lenght (mm)   
+            [_cara_v_]: carapace width (mm)   
+            [_maturacao_]: maturation status of the gonad (RU = rudmentar, ED = developing, DE = developed)
+            [_data_]: date of the collection.  
+        -   🟩 data_force.xlsx (raw data spreadsheet from the lab measurements)   
+            __Variables__:   
+            [_ID_]: crab ID   
+            [_claw_size_]: claw lenght (mm)   
+            [_carapace_size_]: carapace width (mm)   
+            [_claw_type_]: if it was original (brachychelous) or regenerated (leptochelous)   
+            [_carapace_color_]: if it was white (b) or dark (e)   
+            [_force1_]: first claw pinch force measurement   
+            [_force2_]: second claw pinch force measurement   
+            [_force3_]: third claw pinch force measurement   
+            [_max_force_]: the strongest measurement of claw pinch   
+            [_weight_mg_]: claw mass in miligrams   
+            [_weight_g_]: claw mass in grams   
+            [_data_]: collection date   
+        -   🟩 mate_choice.xlsx (raw data spreadsheet from the mate choice experiment)   
+            __Variables__:   
+            [_ID_]: crab ID   
+            [_color_]: carapace color of the crab (white or dark)   
+            [_choice_]: if the famela choose a male (1) or not choose (0)   
+            [_no_choice_]: number of females that made no choice   
+            [_experimento_]: if it was a pilot experiment or oficial experiment   
+            [_date_]: collection date   
         -   🟩 pfowl_transmittance.csv (peafowl ocular transmittance)
     -   📁 processed
          - 🟩 01_reflet_carapace_type.csv (reflectance spreadsheet)
@@ -51,7 +81,7 @@ This repository contains the data, scripts, and outputs associated with the manu
           - 📊 Figure_2_vismodel.png
           - 📊 Figure_3_morphofunctional-traits.png
           - 📊 Figure_4_gonadal-maturity.png
-          - 📊 Figure_5_mate-choice.png
+          - 📊 Figure_mate-choice.png
     -    📁 tables
           - 🟩 01_summary_cor.csv (colorimetric variables)
           - 🟩 01_vis-all.csv (visual model results)
