@@ -20,8 +20,7 @@ dados_clean <- dados %>%
          carapace_color = cor,
          claw_lenght = quela_h,
          carapace_size = cara_h,
-         maturation_stage = maturacao,
-         residencia = Residencia
+         maturation_stage = maturacao
   ) %>%
   mutate(carapace_color = fct_recode(carapace_color,
                                      "White" = "b",
