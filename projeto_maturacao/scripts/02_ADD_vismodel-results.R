@@ -5,7 +5,7 @@
 # Last update: Tue Oct 21 14:56:36 2025 ------------------------------
 
 # Packages ----
-library(dplyr)
+library(dplyr) #version: 1.1.4
 
 # Import datasets ----
 # all

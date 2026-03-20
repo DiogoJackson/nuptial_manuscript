@@ -6,9 +6,9 @@
 # Wed May 21 08:06:47 2025 ------------------------------
 
 #Packages ----
-library(tidyverse)
-library(pavo)
-library(colorspec) #To install `colorspec` use: remotes::install_github("Diogojackson/colorspec/colorspec")
+library(tidyverse)    #version 2.0.0
+library(pavo)         #version 2.9.0
+library(colorspec)    #To install `colorspec` use: remotes::install_github("Diogojackson/colorspec/colorspec")
 
 #Import procspec data ----
 refletancias <- getspec("data/raw/reflectances",                 

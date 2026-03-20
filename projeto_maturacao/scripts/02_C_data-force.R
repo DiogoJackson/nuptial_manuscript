@@ -6,7 +6,7 @@
 
 # Packages ----
 library(tidyverse)
-library(readxl)
+library(readxl) #version 1.4.5
 
 # Load data ---------------------------------------------------------------
 data_force <- read_excel("data/raw/data_force.xlsx")
