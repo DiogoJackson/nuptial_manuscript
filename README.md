@@ -39,8 +39,9 @@ CC0 1.0 Universal (Public Domain Dedication)
     * The raw data, including spreadsheets with experimental data and reflectance measurements.
     * The processed versions of the experimental data.
    
-2. __outputs__: the `outputs` folder contains:  
-    * The figures generated for the manuscript (Figures 2, 3, 4, and 5).
+2. __outputs__: the outputs folder contains:
+    * There is nothing here before running the scripts.
+    * The scripts generate the figures used in the manuscript, as well as the tables.
    
 3. __scripts__: the `scripts` folder contains:  
     * R scripts (.R) to import and clean reflectance and raw data, fit models, and generate figures used in the manuscript.
@@ -52,7 +53,8 @@ CC0 1.0 Universal (Public Domain Dedication)
         -   📁 nuptial_reflectance (contains crab reflectance spectra in procspec files from field measurements)
         -   📁 reflectances (contains crab reflectance spectra from both field and lab measurements)
         -   📁 reflectancias_modelo (contains crab model reflectance spectra)
-        -   🟩 dados_maturidade.xlsx (raw data spreadsheet from the gonadal maturity experiment)   
+        -   🟩 dados_maturidade.xlsx (raw data spreadsheet from the gonadal maturity experiment)
+        -   🟩 dados_maturidade.csv  (raw data spreadsheet from the gonadal maturity experiment in csv format)   
             __Variables__:   
                   • _ID_: ID of individual crabs.  
                   • _sexo_: sex of the crabs (male or female).  
@@ -63,7 +65,8 @@ CC0 1.0 Universal (Public Domain Dedication)
                   • _cara_v_: carapace width (mm).  
                   • _maturacao_: gonadal maturation status (RU = rudimentary, ED = developing, DE = developed).  
                   • _data_: date of collection.  
-        -   🟩 data_force.xlsx (raw data spreadsheet from the lab measurements)   
+        -   🟩 data_force.xlsx (raw data spreadsheet from the lab measurements)
+        -   🟩 data_force.csv  (raw data spreadsheet from the lab measurements in csv format) 
             __Variables__:   
                   • _ID_: crab ID.  
                   • _claw_size_: claw length (mm).  
@@ -77,7 +80,8 @@ CC0 1.0 Universal (Public Domain Dedication)
                   • _weight_mg_: claw mass in milligrams.  
                   • _weight_g_: claw mass in grams.  
                   • _data_: collection date.
-        -   🟩 mate_choice.xlsx (raw data spreadsheet from the mate choice experiment)   
+        -   🟩 mate_choice.xlsx (raw data spreadsheet from the mate choice experiment)
+        -   🟩 mate_choice.csv  (raw data spreadsheet from the mate choice experiment in csv format)  
             __Variables__:   
                   • _ID_: crab ID   
                   • _color_: carapace color of the crab (white or dark)   
@@ -96,19 +100,9 @@ CC0 1.0 Universal (Public Domain Dedication)
          - 🟩 maturation_data_clean.csv (cleaned version of dados_maturidade.xlsx)
 -   📁 outputs
     -    📁 figures
-          - 📊 Figure_2_vismodel.png
-          - 📊 Figure_3_morphofunctional-traits.png
-          - 📊 Figure_4_gonadal-maturity.png
-          - 📊 Figure_mate-choice.png
+         
     -    📁 tables
-          - 🟩 01_summary_cor.csv (colorimetric variables)
-          - 🟩 01_vis-all.csv (visual model results)
-          - 🟩 01_vismodel_carapace_color.csv (visual model results for carapace color)
-          - 🟩 01_vismodel_fiddlercrab.csv (visual model results for fiddler crab vision only)
-          - 🟩 01_visual-results.csv (visual model results with colorimetric variables)
-          - 🟩 02_vis.results.clean.csv (cleaned visual model results with colorimetric variables)
-          - 🟩 mann_whitney_result.csv (summary of Mann–Whitney test results)
-          - 🟩 shapiro_test_result.csv (summary of Shapiro–Wilk test results)
+          
 -   📁 scripts
     -    🔵 00_ADD_reflectance-data.R (import procspec reflectance data, create a spreadsheet, and save it)
     -    🔵 01_C_reflectance-data.R (clean reflectance spreadsheet)
